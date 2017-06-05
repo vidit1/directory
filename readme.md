@@ -2,10 +2,11 @@
 
 Folder Management system.
 ### Functionality List
-By default you are present in the root directory
+By default you are present in the Home directory
 - Create a new folder by click om "Create New Folder button", by clicking on it a input box appears, enter name of folder and press enter
 - Click on any of the Directory to view the list of folders present in it.
 - Press Back button to return to the parent Directory
+- View only path is shown which contains the path to the home directory
 
 #### Deployment
 Create a http server by running the below command in the folder
