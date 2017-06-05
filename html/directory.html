@@ -1,0 +1,66 @@
+<div id="mainDiv" ng-controller="DirectoryCtrl as $ctrl">
+    <div class="row text-center nav-bar">
+        <span class="heading">Directory Structure</span>
+    </div>
+    <div class="container" style="padding: 20px 0">
+        <div class=" col-md-12">
+            <div class="col-md-1" style="padding: 6px">
+                Path:-
+            </div>
+            <div class="col-md-11 path">
+                <div class="path-directory-name" ng-repeat="id in currentPathArray" >{{directoriesMap[id].name}}<span class="glyphicon glyphicon-chevron-right folder-name-separator"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="back-button" ng-click="openParentDirectory()" ng-show="directoriesMap[currentDirectory].parent_id!=null">
+            <span class="glyphicon glyphicon-arrow-left custom-icon"> </span>
+            Back
+        </div>
+        <div class="col-md-12 folder-main">
+            <div class="col-md-12 padding-0" style="border-bottom: 1.5px solid silver;">
+                <p class="folder-list-heading" ng-click="sorting = sorting == 1 ? 2 : 1">
+                    <span class="">Name</span>
+                    <span class="glyphicon glyphicon-chevron-up order-icon" ng-if="sorting==1"></span>
+                    <span class="glyphicon glyphicon-chevron-down order-icon" ng-if="sorting==2"></span>
+                </p>
+            </div>
+            <div class="folder-name" ng-repeat="folderId in directoriesMap[currentDirectory].folder_list" ng-click="selectDirectory(folderId)">
+                <span class="glyphicon glyphicon-folder-close"></span> &nbsp;{{directoriesMap[folderId].name}}
+            </div>
+            <div class="create-directory">
+                <div ng-show="!createFolder">
+                    <p  ng-click="createFolder = true">
+                        <span class="glyphicon glyphicon-plus create-icon"></span> &nbsp;Create New Folder
+                    </p>
+                </div>
+                <div ng-show="createFolder">
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Enter Folder name" ng-model="newFolderName" id="create_input">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success" ng-click="createNewDirectory(newFolderName)">Add Folder</button>
+                        <button class="btn btn-danger" ng-click="newFolderName='';createFolder=false">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div style="width:25%;position:fixed; bottom:0;z-index:2000;margin-left:3%">
+        <div class="alert alert-info fade in" ng-repeat="taskCard in tasks"
+             ng-show="taskCard.status && taskCard.type == 0">
+            <strong>{{taskCard.text}} </strong>
+        </div>
+        <div class="alert alert-danger fade in" ng-repeat="taskCard in tasks"
+             ng-show="taskCard.status && taskCard.type == 1">
+            <strong>{{taskCard.text}} </strong>
+        </div>
+
+        <div class="alert alert-info fade in" ng-repeat="taskCard in tasks"
+             ng-show="taskCard.status && taskCard.type == 2">
+            <strong>{{taskCard.text}} </strong>
+        </div>
+    </div>
+</div>
